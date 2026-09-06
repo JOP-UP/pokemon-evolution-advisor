@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple tool that helps you decide whether to evolve your Pokemon.">
+  <title>Pokemon Evolution Advisor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-title">
+      <span aria-hidden="true">★</span>
+      POKEMON EVOLUTION ADVISOR
+      <span aria-hidden="true">★</span>
+    </div>
+
+    <marquee class="welcome-message" scrollamount="5">
+      Welcome, Pokemon Trainer! Find out whether you should evolve your Pokemon!
+    </marquee>
+  </header>
+
+  <main class="page-container">
+    <section class="intro-box" aria-labelledby="page-heading">
+      <h1 id="page-heading">Should I evolve this Pokemon?</h1>
+      <p>
+        Select a Pokemon below. We will compare it with its next evolution
+        using the information in our Pokemon database.
+      </p>
+    </section>
+
+    <section class="control-panel" aria-labelledby="selector-heading">
+      <h2 id="selector-heading">Choose your Pokemon</h2>
+
+      <div class="selector-row">
+        <label for="pokemon-select">Pokemon:</label>
+        <select id="pokemon-select" name="pokemon">
+          <option value="">-- Select a Pokemon --</option>
+        </select>
+
+        <button id="check-button" type="button">CHECK!</button>
+      </div>
+
+      <p id="status-message" class="status-message" role="status">
+        Loading Pokemon database...
+      </p>
+    </section>
+
+    <section id="result-section" class="result-section" aria-labelledby="result-heading" hidden>
+      <h2 id="result-heading">Evolution Report</h2>
+
+      <div class="pokemon-comparison">
+        <article class="pokemon-card">
+          <h3>Current Pokemon</h3>
+          <img id="current-image" class="pokemon-image" src="" alt="">
+          <p id="current-name" class="pokemon-name">---</p>
+
+          <dl class="pokemon-details">
+            <div>
+              <dt>Type:</dt>
+              <dd id="current-type">---</dd>
+            </div>
+            <div>
+              <dt>Total stats:</dt>
+              <dd id="current-total">---</dd>
+            </div>
+          </dl>
+        </article>
+
+        <div class="evolution-arrow" aria-hidden="true">
+          <span>EVOLVES INTO</span>
+          <strong>→</strong>
+        </div>
+
+        <article class="pokemon-card">
+          <h3>Next Evolution</h3>
+          <img id="evolution-image" class="pokemon-image" src="" alt="">
+          <p id="evolution-name" class="pokemon-name">---</p>
+
+          <dl class="pokemon-details">
+            <div>
+              <dt>Type:</dt>
+              <dd id="evolution-type">---</dd>
+            </div>
+            <div>
+              <dt>Total stats:</dt>
+              <dd id="evolution-total">---</dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+
+      <div class="stat-box">
+        <h3>Stat Comparison</h3>
+
+        <table class="stat-table">
+          <thead>
+            <tr>
+              <th scope="col">Stat</th>
+              <th scope="col">Current</th>
+              <th scope="col">Evolution</th>
+              <th scope="col">Change</th>
+            </tr>
+          </thead>
+          <tbody id="stat-table-body"></tbody>
+        </table>
+      </div>
+
+      <div id="recommendation-box" class="recommendation-box">
+        <h3>Our Recommendation</h3>
+        <p id="recommendation-text">---</p>
+      </div>
+    </section>
+
+    <noscript>
+      <p class="error-message">
+        JavaScript must be enabled to use the Pokemon Evolution Advisor.
+      </p>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <p>Pokemon Evolution Advisor © 2026</p>
+    <p>
+      <span aria-hidden="true">◆</span>
+      Best viewed at 800 × 600 resolution
+      <span aria-hidden="true">◆</span>
+    </p>
+    <p class="visitor-counter">VISITOR: 000151</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
