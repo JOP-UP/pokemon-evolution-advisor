@@ -1,0 +1,418 @@
+/* Pokemon Evolution Advisor — proudly styled like it is 1998. */
+
+:root {
+  --page-blue: #000080;
+  --bright-blue: #0000ff;
+  --panel-gray: #c0c0c0;
+  --light-gray: #eeeeee;
+  --dark-gray: #404040;
+  --yellow: #ffff00;
+  --green: #008000;
+  --red: #cc0000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #008080;
+}
+
+body {
+  width: min(94%, 850px);
+  min-height: 100vh;
+  margin: 12px auto;
+  color: #000000;
+  background-color: var(--panel-gray);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 17px;
+  border-top: 4px solid #ffffff;
+  border-left: 4px solid #ffffff;
+  border-right: 4px solid var(--dark-gray);
+  border-bottom: 4px solid var(--dark-gray);
+  box-shadow: 8px 8px 0 rgb(0 0 0 / 45%);
+}
+
+button,
+select {
+  font: inherit;
+}
+
+.site-header {
+  text-align: center;
+  border-bottom: 3px ridge #ffffff;
+}
+
+.header-title {
+  padding: 12px 8px;
+  color: #ffffff;
+  background-color: var(--page-blue);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(21px, 5vw, 34px);
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 0 #000000;
+}
+
+.header-title span {
+  color: var(--yellow);
+}
+
+.welcome-message {
+  display: block;
+  padding: 5px;
+  color: #000000;
+  background-color: var(--yellow);
+  font-weight: bold;
+  border-top: 2px solid #ffffff;
+  border-bottom: 2px solid #808080;
+}
+
+.page-container {
+  padding: 14px;
+}
+
+.intro-box,
+.control-panel,
+.result-section,
+.stat-box,
+.recommendation-box,
+.error-message {
+  margin-bottom: 16px;
+  padding: 14px;
+  background-color: var(--light-gray);
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #606060;
+  border-bottom: 3px solid #606060;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 8px;
+  color: var(--page-blue);
+  font-size: clamp(26px, 6vw, 40px);
+  text-align: center;
+}
+
+h2 {
+  margin: -14px -14px 14px;
+  padding: 5px 8px;
+  color: #ffffff;
+  background-color: var(--page-blue);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+h3 {
+  color: var(--page-blue);
+  text-decoration: underline;
+}
+
+.intro-box p {
+  max-width: 650px;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  text-align: center;
+}
+
+.selector-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+}
+
+.selector-row label {
+  font-weight: bold;
+}
+
+#pokemon-select {
+  width: min(100%, 310px);
+  min-height: 35px;
+  padding: 4px 8px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 2px inset #ffffff;
+}
+
+#check-button {
+  min-height: 37px;
+  padding: 5px 22px;
+  color: #ffffff;
+  background-color: var(--bright-blue);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #303030;
+  border-bottom: 3px solid #303030;
+  cursor: pointer;
+}
+
+#check-button:hover,
+#check-button:focus-visible {
+  color: #000000;
+  background-color: var(--yellow);
+  outline: 2px dotted #000000;
+  outline-offset: 3px;
+}
+
+#check-button:active {
+  border-top-color: #303030;
+  border-left-color: #303030;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+  transform: translate(2px, 2px);
+}
+
+.status-message {
+  margin: 12px 0 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  text-align: center;
+}
+
+.result-section[hidden] {
+  display: none;
+}
+
+.pokemon-comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.pokemon-card {
+  min-width: 0;
+  padding: 12px;
+  background-color: #ffffff;
+  text-align: center;
+  border: 3px double var(--page-blue);
+}
+
+.pokemon-card h3 {
+  margin-bottom: 5px;
+}
+
+.pokemon-image {
+  width: 150px;
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  background-image:
+    linear-gradient(45deg, #dddddd 25%, transparent 25%),
+    linear-gradient(-45deg, #dddddd 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #dddddd 75%),
+    linear-gradient(-45deg, transparent 75%, #dddddd 75%);
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  background-size: 16px 16px;
+  border: 2px inset #ffffff;
+}
+
+.pokemon-name {
+  margin: 7px 0;
+  color: var(--page-blue);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.pokemon-details {
+  margin: 0;
+}
+
+.pokemon-details div {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.pokemon-details dt {
+  font-weight: bold;
+}
+
+.pokemon-details dd {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.evolution-arrow {
+  color: var(--red);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.evolution-arrow span {
+  display: block;
+  max-width: 110px;
+  font-size: 12px;
+}
+
+.evolution-arrow strong {
+  display: block;
+  font-size: 52px;
+  line-height: 1;
+}
+
+.stat-box {
+  margin-bottom: 16px;
+  background-color: #ffffff;
+}
+
+.stat-box h3,
+.recommendation-box h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+}
+
+.stat-table th,
+.stat-table td {
+  padding: 6px;
+  border: 2px solid #000000;
+  text-align: center;
+}
+
+.stat-table th {
+  color: #ffffff;
+  background-color: var(--page-blue);
+}
+
+.stat-table tbody tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.recommendation-box {
+  margin-bottom: 0;
+  color: #000000;
+  background-color: var(--yellow);
+  border: 4px double #000000;
+}
+
+.recommendation-box p {
+  margin-bottom: 0;
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.recommendation-box.recommend-yes {
+  background-color: #7cff7c;
+}
+
+.recommendation-box.recommend-no {
+  background-color: #ff8b8b;
+}
+
+.error-message {
+  color: #ffffff;
+  background-color: var(--red);
+  font-weight: bold;
+  text-align: center;
+}
+
+.site-footer {
+  padding: 10px;
+  color: #ffffff;
+  background-color: var(--page-blue);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  text-align: center;
+  border-top: 3px ridge #ffffff;
+}
+
+.site-footer p {
+  margin: 3px 0;
+}
+
+.visitor-counter {
+  display: inline-block;
+  margin-top: 8px !important;
+  padding: 3px 7px;
+  color: #00ff00;
+  background-color: #000000;
+  border: 2px inset #ffffff;
+}
+
+@media (max-width: 620px) {
+  body {
+    width: calc(100% - 12px);
+    margin: 6px;
+    font-size: 16px;
+    box-shadow: 4px 4px 0 rgb(0 0 0 / 45%);
+  }
+
+  .page-container {
+    padding: 8px;
+  }
+
+  .intro-box,
+  .control-panel,
+  .result-section,
+  .stat-box,
+  .recommendation-box {
+    padding: 10px;
+  }
+
+  h2 {
+    margin: -10px -10px 10px;
+  }
+
+  .selector-row {
+    flex-direction: column;
+  }
+
+  #pokemon-select,
+  #check-button {
+    width: 100%;
+  }
+
+  .pokemon-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .evolution-arrow {
+    transform: rotate(90deg);
+  }
+
+  .evolution-arrow span {
+    display: none;
+  }
+
+  .stat-table {
+    font-size: 12px;
+  }
+
+  .stat-table th,
+  .stat-table td {
+    padding: 4px 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-message {
+    white-space: normal;
+  }
+}
